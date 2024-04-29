@@ -1,0 +1,15 @@
+name: Trivy
+on:
+  workflow_dispatch:
+jobs:
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/folioci/alpine-jre-openjdk17:2.0.7'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH,MEDIUM.LOW'
